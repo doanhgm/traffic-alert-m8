@@ -1,0 +1,2 @@
+rootProject.name = "TrafficAlert"
+include ':app'
