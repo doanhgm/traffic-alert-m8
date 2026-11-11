@@ -18,10 +18,15 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Generate Wrapper and Build APK
-      run: |
-        gradle wrapper
-        ./gradlew assembleDebug --stacktrace
+    # Tự động tải và nạp sẵn Gradle 8.5 vào hệ thống
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+      with:
+        gradle-version: '8.5'
+
+    # Build trực tiếp bằng Gradle mà không cần wrapper
+    - name: Build APK
+      run: gradle assembleDebug --stacktrace
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
